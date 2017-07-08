@@ -11,6 +11,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   Button
 } from 'react-native';
 
@@ -87,13 +88,13 @@ export default class tecladoindigena extends Component {
           Welcome to
         </Text>
 
-        <View style={styles.messages}>
+        <ScrollView style={styles.messages}>
           {_.map(this.state.messages, (message, key) => {
             return (
               <Message value={message} key={key} />
             )
           })}
-        </View>
+        </ScrollView>
 
 
         <View style={styles.messageForm}>
