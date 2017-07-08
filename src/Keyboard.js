@@ -43,9 +43,7 @@ export default class Keyboard extends Component {
 
         {_.map(data.slice(-4).slice(0, 2), key => {
           return <TouchableOpacity style={styles.keyboardButton} key={key.value} onPress={this.onClick.bind(this, key)}>
-            <Text style={styles.keyboardText}>
-              {key.char}
-            </Text>
+            <Char data={key}/>            
           </TouchableOpacity>
         })}
 
