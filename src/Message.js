@@ -17,17 +17,13 @@ import {
 import _ from 'lodash';
 import Char from './Char';
 
-export default class InputCustom extends Component {
+export default class Message extends Component {
   render() {
     const {value} = this.props;
-    let newValue = value
-    if(value.length > 6){
-      newValue = value.slice(value.length - 6, value.length)
-    }
 
     return (
       <View style={styles.input}>
-        {_.map(newValue, (key, keyIdx) => {
+        {_.map(value, (key, keyIdx) => {
           return <Char data={key} key={keyIdx} />
         })}
       </View>
@@ -38,12 +34,10 @@ export default class InputCustom extends Component {
 const styles = StyleSheet.create({
   input: {
     height: 50,
-    flex: 1,
+    width: Dimensions.get('window').width,
     backgroundColor: '#fff',
     flexDirection: 'row',
     alignItems: 'center',
     overflow: 'scroll'
   }
 });
-
-AppRegistry.registerComponent('InputCustom', () => InputCustom);

@@ -5,15 +5,19 @@
  */
 
 import React, { Component } from 'react';
+import _ from 'lodash';
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
 
 import Keyboard from './src/Keyboard';
 import InputCustom from './src/InputCustom';
+import Message from './src/Message';
+
 
 export default class tecladoindigena extends Component {
 
@@ -21,13 +25,20 @@ export default class tecladoindigena extends Component {
     super();
 
     this.state = {
-      inputValue: []
+      inputValue: [],
+      messages: []
     }
   }
 
   onInput(newChar) {
     this.setState({
       inputValue: this.state.inputValue.concat([newChar])
+    });
+  }
+
+  onSend() {
+    this.setState({
+      messages: this.state.messages.concat([this.state.inputValue])
     });
   }
 
@@ -69,17 +80,21 @@ export default class tecladoindigena extends Component {
         <Text style={styles.welcome}>
           Welcome to
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
 
-          aaaa{JSON.stringify(inputValue)}bbb
-        </Text>
+        <View style={styles.messages}>
+          {_.map(this.state.messages, (message, key) => {
+            return (
+              <Message value={message} key={key} />
+            )
+          })}
+        </View>
 
-        <InputCustom value={inputValue} />
+
+        <View style={styles.messageForm}>
+          <InputCustom value={inputValue} />
+          <Button title="Enviar" onPress={this.onSend.bind(this)}/>
+        </View>
+
 
         <Keyboard data={keyboardData} onInput={this.onInput.bind(this)} />
       </View>
@@ -105,6 +120,15 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     flex: 1
   },
+  messageForm: {
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    alignItems: 'center'
+  },
+  messages: {
+    flex: 1
+  }
+
 });
 
 AppRegistry.registerComponent('tecladoindigena', () => tecladoindigena);
