@@ -40,6 +40,12 @@ export default class tecladoindigena extends Component {
     this.setState({
       messages: this.state.messages.concat([this.state.inputValue])
     });
+
+    this.setState({
+      inputValue: []
+    });
+
+
   }
 
   render() {
